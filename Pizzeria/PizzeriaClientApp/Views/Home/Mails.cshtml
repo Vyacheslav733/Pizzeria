@@ -1,0 +1,74 @@
+﻿@using PizzeriaContracts.ViewModels
+
+@model List<MessageInfoViewModel>
+@Url.ActionContext.RouteData.Values["page"]
+
+@{
+	ViewData["Title"] = "Mails";
+}
+
+
+<div class="text-center">
+	<h1 class="display-4">Заказы</h1>
+</div>
+
+
+<div class="text-center">
+	@{
+		if (Model == null)
+		{
+			<h3 class="display-4">Авторизируйтесь</h3>
+			return;
+		}
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>
+						Дата письма
+					</th>
+					<th>
+						Заголовок
+					</th>
+					<th>
+						Текст
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.DateDelivery)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Subject)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Body)
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+		<div class="d-flex justify-content-center align-items-center">
+			@{
+				int page = int.Parse(Context.Request.Query["page"]);
+				<div class="m-1">
+					<input type="number" class="form-control" min="1" step="1" asp-action="Mails" name="page" value="@(page)" readonly>
+				</div>
+				if (page > 1)
+				{
+					<a name="page" class="btn btn-primary" type="button" asp-action="Mails" asp-route-page="@(page-1)">&lt;-</a>
+				}
+				else
+				{
+					<p class="btn btn-primary my-auto">&lt;-</p>
+				}
+
+				<a name="" id="" class="btn btn-primary" type="button" asp-action="Mails" asp-route-page="@(page+1)">-&gt;</a>
+			}
+		</div>
+	}
+</div>

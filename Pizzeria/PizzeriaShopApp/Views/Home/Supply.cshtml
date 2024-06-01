@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Supply";
+}
+<div class="text-center">
+    <h2 class="display-4">Создание поставки</h2>
+</div>
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Магазин</label>
+        <select class="form-select form-select-lg" id="shop" name="shop" asp-items="@(new SelectList(@ViewBag.Shops,"Id", "ShopName"))"></select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Пицца</label>
+        <select class="form-select form-select-lg" id="pizza" name="pizza" asp-items="@(new SelectList(@ViewBag.Pizzas,"Id", "PizzaName"))"></select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Колличество</label>
+        <input type="number" min="0" step="1" pattern="[0-9]" class="form-control" name="count" id="count">
+    </div>
+    <input class="btn btn-success" type="submit" value="Создать поставку">
+    <a class="btn btn-primary" href="./Index" role="button">Отмена</a>
+</form>

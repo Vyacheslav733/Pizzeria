@@ -1,0 +1,68 @@
+﻿@using PizzeriaContracts.ViewModels
+
+@model List<ShopViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Магазины</h1>
+</div>
+
+
+<div class="text-center ">
+    <p>
+        <a asp-action="Create">Создать магазин</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Номер
+                </th>
+                <th>
+                    Название
+                </th>
+                <th>
+                    Адрес
+                </th>
+                <th>
+                    Дата открытия
+                </th>
+                <th>
+                    Максимальная вместимость
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShopName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Adress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OpeningDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PizzaMaxCount)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Update" asp-route-Id="@(item.Id)" role="button">Изменить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

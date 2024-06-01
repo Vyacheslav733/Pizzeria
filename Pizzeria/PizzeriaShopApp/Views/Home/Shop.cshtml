@@ -1,0 +1,75 @@
+﻿@using PizzeriaDataModels.Models;
+@using PizzeriaContracts.ViewModels;
+
+@model ShopPizzaViewModel
+
+@{
+	ViewData["Title"] = "Shop";
+}
+
+<div class="text-center">
+	@{
+		if (Model == null)
+		{
+			<h2 class="display-4">Создание магазина</h2>
+		}
+		else
+		{
+			<h2 class="display-4">Изменение магазина</h2>
+		}
+	}
+</div>
+
+<form method="post">
+	<div class="mb-3">
+		<label class="form-label">Название</label>
+		<input type="text" class="form-control" name="shopname" id="shopname" value="@(Model==null ? "" : Model.Shop?.ShopName)" />
+	</div>
+	<div class="mb-3">
+		<label class="form-label">Адрес</label>
+		<input type="text" class="form-control" name="adress" id="adress" value="@(Model==null ? "" : Model.Shop?.Adress)" />
+	</div>
+	<div class="mb-3">
+		<label for="startDate">Дата открытия</label>
+		<input class="form-control" type="date" name="openingdate" id="openingdate" value="@(Model==null ? "" : Model.Shop?.OpeningDate.ToString("yyyy-MM-dd"))" />
+	</div>
+	<div class="mb-3">
+		<label class="form-label">Вместимость</label>
+		<input type="number" min="0" step="1" pattern="[0-9]" class="form-control" name="maxcount" id="maxcount" value="@(Model==null ? "" : Model.Shop?.PizzaMaxCount)" />
+	</div>
+	<div class="mb-3 ">
+		<input class="btn btn-primary" type="submit" value="Сохранить">
+		@{
+			if (Model != null && Model.Shop != null)
+			{
+				<input class="btn btn-danger" asp-action="Delete" type="submit" value="Удалить" asp-route-Id="@(Model==null ? 0 : Model.Shop.Id.ToString())">
+			}
+		}
+	</div>
+</form>
+@{
+	if (Model != null && Model.Shop != null)
+	{
+		<div>
+			<h6>Содержимое магазина</h6>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Название</th>
+					<th>Количество</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model.ShopPizza)
+				{
+					<tr>
+						<td>@Html.DisplayFor(modelItem => item.Value.Pizza.PizzaName)</td>
+						<td>@Html.DisplayFor(modelItem => item.Value.Count)</td>
+					</tr>
+				}
+			</tbody>
+
+		</table>
+	}
+}

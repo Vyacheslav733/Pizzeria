@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<None Remove="nlog.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<Content Include="nlog.config">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.8" />
+    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.19" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PizzeriaBusinessLogic\PizzeriaBusinessLogic.csproj" />
+    <ProjectReference Include="..\PizzeriaContracts\PizzeriaContracts.csproj" />
+    <ProjectReference Include="..\PizzeriaDatabaseImplement\PizzeriaDatabaseImplement.csproj" />
+    <ProjectReference Include="..\PizzeriaFileImplement\PizzeriaFileImplement.csproj" />
+    <ProjectReference Include="..\PizzeriaListImplement\PizzeriaListImplement.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ReportGroupedOrders.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ReportOrder.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PdfSharp.MigraDoc.Standard" Version="1.51.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PizzeriaContracts\PizzeriaContracts.csproj" />
+    <ProjectReference Include="..\PizzeriaDataModels\PizzeriaDataModels.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy /Y &quot;$(TargetDir)*.dll&quot; &quot;$(SolutionDir)ImplementationExtensions\*.dll&quot;" />
+  </Target>
+
+</Project>
